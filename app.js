@@ -102,7 +102,6 @@ app.get('/logout', function(req, res, next) {
     });
   });
   
-
 // End Coding ///////////////////////////////////
 app.listen(3000,()=>{
     console.log("** App Started on Port 3000");
