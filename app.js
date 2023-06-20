@@ -27,7 +27,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // mongoose.connect("mongodb://127.0.0.1:27017/userDB");
-mongoose.connect(MONGO_ATLAS_API);
+mongoose.connect(process.env.MONGO_ATLAS_API);
 
 const userSchema = new mongoose.Schema({
     email: String,
