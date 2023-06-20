@@ -119,7 +119,7 @@ app.post("/submit", (req, res)=>{
 });
 
 app.get("/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
+  passport.authenticate("google", { scope: ["openid"] })
 );
 
 app.get("/auth/google/secrets",
