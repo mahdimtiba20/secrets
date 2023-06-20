@@ -27,7 +27,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // mongoose.connect("mongodb://127.0.0.1:27017/userDB");
-mongoose.connect("mongodb+srv://admin-mahdi:Azqswx741@cluster0.od1wxp3.mongodb.net/userDB");
+mongoose.connect(MONGO_ATLAS_API);
 
 const userSchema = new mongoose.Schema({
     email: String,
@@ -56,7 +56,8 @@ passport.serializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets",
+    //callbackURL: "http://localhost:3000/auth/google/secrets",
+    callbackURL: "https://secrets-vrom.onrender.com/auth/google/secrets",
     passReqToCallback: true
 },
     function (request, accessToken, refreshToken, profile, done) {
@@ -69,7 +70,8 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/secrets"
+    // callbackURL: "http://localhost:3000/auth/facebook/secrets"
+    callbackURL: "https://secrets-vrom.onrender.com/auth/facebook/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
