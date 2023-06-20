@@ -26,7 +26,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://127.0.0.1:27017/userDB");
+// mongoose.connect("mongodb://127.0.0.1:27017/userDB");
+mongoose.connect("mongodb+srv://admin-mahdi:Azqswx741@cluster0.od1wxp3.mongodb.net/userDB");
 
 const userSchema = new mongoose.Schema({
     email: String,
@@ -59,7 +60,7 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true
 },
     function (request, accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ username: profile.displayName, googleId: profile.id }, function (err, user) {
+        User.findOrCreate({ googleId: profile.id }, function (err, user) {
             return done(err, user);
         });
     }
@@ -208,6 +209,11 @@ app.get('/logout', function(req, res, next) {
   });
   
 // End Coding ///////////////////////////////////
-app.listen(3000,()=>{
-    console.log("** App Started on Port 3000");
+let port = process.env.Port;
+if (port == null || port ==""){
+    port = 3000;
+}
+
+app.listen(port, function(){
+    console.log("*** App is Running on Port "+port+" ***");
 });
